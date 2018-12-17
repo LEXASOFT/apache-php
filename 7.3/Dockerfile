@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.3-apache
 MAINTAINER Alexey Gudym <lexasoft83@gmail.com>
 
 RUN a2enmod rewrite expires headers \
@@ -14,12 +14,18 @@ RUN a2enmod rewrite expires headers \
         zip \
         net-tools \
         $devDependencies \
-    && pecl install apcu mcrypt-1.0.1 \
+    && pecl install apcu \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install -j$(nproc) gd ldap pdo pdo_mysql xsl zip \
+    && curl -fsSL "https://pecl.php.net/get/mcrypt" -o mcrypt.tgz \
+    && mkdir -p /tmp/mcrypt \
+    && tar -xf mcrypt.tgz -C /tmp/mcrypt --strip-components=1 \
+    && rm mcrypt.tgz \
+    && docker-php-ext-install -j$(nproc) /tmp/mcrypt \
+    && rm -r /tmp/mcrypt \
     && docker-php-ext-enable apcu mcrypt \
     && apt-get purge --auto-remove -qy $devDependencies \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+    && rm -rf /var/lib/apt/lists/ /tmp/* /var/tmp/* /usr/share/doc/*
