@@ -28,4 +28,4 @@ RUN a2enmod rewrite expires headers \
     && docker-php-ext-enable apcu mcrypt \
     && apt-get purge --auto-remove -qy $devDependencies \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ /tmp/* /var/tmp/* /usr/share/doc/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
