@@ -1,5 +1,4 @@
-FROM php:apache
-MAINTAINER Alexey Gudym <lexasoft83@gmail.com>
+FROM php:apache-stretch
 
 RUN a2enmod rewrite expires headers \
     && apt-get update \
