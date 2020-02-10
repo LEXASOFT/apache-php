@@ -1,4 +1,4 @@
-FROM php:apache-buster
+FROM php:7.4-apache-buster
 
 RUN a2enmod rewrite expires headers \
     && apt-get update \
