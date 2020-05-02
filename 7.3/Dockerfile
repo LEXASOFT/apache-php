@@ -13,7 +13,7 @@ RUN a2enmod rewrite expires headers \
         zip \
         net-tools \
         $devDependencies \
-    && pecl install apcu \
+    && pecl install apcu redis \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure zip --with-libzip \
@@ -24,7 +24,7 @@ RUN a2enmod rewrite expires headers \
     && rm mcrypt.tgz \
     && docker-php-ext-install -j$(nproc) /tmp/mcrypt \
     && rm -r /tmp/mcrypt \
-    && docker-php-ext-enable apcu mcrypt \
+    && docker-php-ext-enable apcu mcrypt redis \
     && apt-get purge --auto-remove -qy $devDependencies \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
