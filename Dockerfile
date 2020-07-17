@@ -17,7 +17,7 @@ RUN a2enmod rewrite expires headers \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-configure zip \
-    && docker-php-ext-install -j$(nproc) gd ldap pdo pdo_mysql xsl zip \
+    && docker-php-ext-install -j$(nproc) gd ldap pdo pdo_mysql sockets xsl zip \
     && curl -fsSL "https://pecl.php.net/get/mcrypt" -o mcrypt.tgz \
     && mkdir -p /tmp/mcrypt \
     && tar -xf mcrypt.tgz -C /tmp/mcrypt --strip-components=1 \
