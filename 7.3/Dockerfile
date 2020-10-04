@@ -11,6 +11,7 @@ RUN a2enmod rewrite expires headers \
         libxslt1.1 \
         zip \
         net-tools \
+        graphviz \
         $devDependencies \
     && mkdir -p /tmp/librdkafka \
     && curl -fsSL https://github.com/edenhill/librdkafka/archive/v1.4.4.tar.gz | tar xvz -C /tmp/librdkafka --strip 1 \
