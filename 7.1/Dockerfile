@@ -7,19 +7,14 @@ RUN a2enmod rewrite expires headers \
         libfreetype6 \
         libjpeg62-turbo \
         libpng16-16 \
+        librdkafka++1 \
+        librdkafka1 \
         libzip4 \
         libxslt1.1 \
         zip \
         net-tools \
         graphviz \
         $devDependencies \
-    && mkdir -p /tmp/librdkafka \
-    && curl -fsSL https://github.com/edenhill/librdkafka/archive/v1.4.4.tar.gz | tar xvz -C /tmp/librdkafka --strip 1 \
-    && cd /tmp/librdkafka \
-    && ./configure \
-    && make -j$(nproc) \
-    && make -j$(nproc) install \
-    && rm -r /tmp/librdkafka \
     && pecl install apcu igbinary rdkafka redis \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
