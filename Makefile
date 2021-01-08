@@ -8,3 +8,6 @@ build:
 	docker build -t $(NAME):7.3 7.3
 	docker build -t $(NAME):7.2 7.2
 	docker build -t $(NAME):7.1 7.1
+
+latest:
+	docker build -t $(NAME):latest .
