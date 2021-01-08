@@ -1,4 +1,4 @@
-FROM php:7.4-apache-buster
+FROM php:8.0.1-apache-buster
 
 ENV BUILD_DEPS="icu-devtools libicu-dev libjpeg62-turbo-dev libpng-dev libjpeg-dev libfreetype6-dev libldap2-dev libxslt-dev libxml2-dev libzip-dev zlib1g-dev" \
     LIB_DEPS="libfreetype6 libjpeg62-turbo libpng16-16 libzip4 libxslt1.1" \
