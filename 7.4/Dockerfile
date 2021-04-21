@@ -1,7 +1,7 @@
 FROM php:7.4-apache-buster
 
-ENV BUILD_DEPS="icu-devtools libicu-dev libjpeg62-turbo-dev libpng-dev libjpeg-dev libfreetype6-dev libldap2-dev libxslt-dev libxml2-dev libzip-dev zlib1g-dev" \
-    LIB_DEPS="libfreetype6 libjpeg62-turbo libpng16-16 libzip4 libxslt1.1" \
+ENV BUILD_DEPS="icu-devtools libicu-dev libjpeg62-turbo-dev libpng-dev libjpeg-dev libfreetype6-dev libldap2-dev libpq-dev libxslt-dev libxml2-dev libzip-dev zlib1g-dev" \
+    LIB_DEPS="libfreetype6 libjpeg62-turbo libpq5 libpng16-16 libzip4 libxslt1.1" \
     TOOL_DEPS="git graphviz make net-tools unzip zip" \
     LIBRDKAFKA_VERSION="1.4.x"
 
@@ -15,7 +15,7 @@ RUN a2enmod rewrite expires headers \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-configure zip \
-    && docker-php-ext-install -j$(nproc) gd ldap pdo pdo_mysql sockets xsl zip \
+    && docker-php-ext-install -j$(nproc) gd ldap pdo pdo_mysql pdo_pgsql sockets xsl zip \
     && docker-php-ext-enable apcu igbinary rdkafka redis \
     && apt-get purge --auto-remove -qy ${BUILD_DEPS} \
     && apt-get clean \
